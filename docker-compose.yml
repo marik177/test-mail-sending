@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+
+  web:
+    build: ./app
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done;
+              python manage.py migrate --noinput && 
+              python manage.py loaddata data_dump.json &&
+              python manage.py runserver 0.0.0.0:8000'
+
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - ./app/.env
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+    - POSTGRES_USER=messages_sender
+    - POSTGRES_PASSWORD=messages_sender
+    - POSTGRES_DB=messages_sender
+
+  celery:
+    restart: always
+    build: ./app
+    volumes:
+      - ./app/:/usr/src/app/
+    command: celery -A messages_sender worker -l INFO
+    depends_on:
+      - redis
+      - db
+      - web
+
+  flower:
+    container_name: flower
+    build: ./app
+    ports:
+      - "5555:5555"
+    command: celery -A messages_sender flower
+    depends_on:
+      - web
+      - db
+      - celery
+      - redis
+volumes:
+  postgres_data:
