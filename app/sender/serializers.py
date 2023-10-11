@@ -6,16 +6,17 @@ from .models import Client, MailSender, Message, Tag
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('name',)
+        fields = ("name",)
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    tags = serializers.SlugRelatedField(queryset=Tag.objects.all(),
-                                        slug_field='name', many=True)
+    tags = serializers.SlugRelatedField(
+        queryset=Tag.objects.all(), slug_field="name", many=True
+    )
 
     class Meta:
         model = Client
-        fields = ('id', 'phone_number', 'tags', 'timezone')
+        fields = ("id", "phone_number", "tags", "timezone")
 
 
 class ClientWriteSerializer(serializers.ModelSerializer):
@@ -23,13 +24,15 @@ class ClientWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ('id', 'phone_number', 'tags', 'timezone')
+        fields = ("id", "phone_number", "tags", "timezone")
 
     def create(self, validated_data):
         tags_names = validated_data.pop("tags", None)
         client = Client.objects.create(**validated_data)
-        mobile_operator_code = validated_data['phone_number'][1:4]
-        tag_mobile_operator_code, created = Tag.objects.get_or_create(name=mobile_operator_code)
+        mobile_operator_code = validated_data["phone_number"][1:4]
+        tag_mobile_operator_code, created = Tag.objects.get_or_create(
+            name=mobile_operator_code
+        )
         tags = [tag_mobile_operator_code]
         if tags_names:
             for tag_name in tags_names:
@@ -40,15 +43,16 @@ class ClientWriteSerializer(serializers.ModelSerializer):
 
 
 class MailSenderSerializer(serializers.ModelSerializer):
-    filters = serializers.SlugRelatedField(queryset=Tag.objects.all(),
-                                           slug_field='name', many=True)
+    filters = serializers.SlugRelatedField(
+        queryset=Tag.objects.all(), slug_field="name", many=True
+    )
 
     class Meta:
         model = MailSender
-        fields = ('id', 'sending_start', 'text', 'sending_stop', 'filters')
+        fields = ("id", "sending_start", "text", "sending_stop", "filters")
 
     def create(self, validated_data):
-        filters = validated_data.pop('filters')
+        filters = validated_data.pop("filters")
         mail_sender = MailSender.objects.create(**validated_data)
         mail_sender.filters.set(filters)
         return mail_sender
@@ -65,4 +69,4 @@ class MailSenderReportSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MailSender
-        fields = ('id', 'text', 'messages')
+        fields = ("id", "text", "messages")

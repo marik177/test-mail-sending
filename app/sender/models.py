@@ -21,9 +21,9 @@ class MailSender(models.Model):
     sending_start = models.DateTimeField(verbose_name="Sending start time")
     text = models.TextField(max_length=255, verbose_name="Message text")
     sending_stop = models.DateTimeField(verbose_name="Sending stop time")
-    filters = models.ManyToManyField(Tag, verbose_name="Filter",
-                                     blank=True,
-                                     related_name='mail_sender')
+    filters = models.ManyToManyField(
+        Tag, verbose_name="Filter", blank=True, related_name="mail_sender"
+    )
 
     class Meta:
         verbose_name = "MailSender"
@@ -37,7 +37,7 @@ class Client(models.Model):
     validate_phone = RegexValidator(
         regex=r"^7\d{10}$",
         message="The phone number must be in format "
-                "7XXXXXXXXXX (X - number from 0 to 9) and has the length of 11",
+        "7XXXXXXXXXX (X - number from 0 to 9) and has the length of 11",
     )
     phone_number = models.CharField(
         verbose_name="Phone number",
@@ -45,9 +45,12 @@ class Client(models.Model):
         unique=True,
         max_length=11,
     )
-    tags = models.ManyToManyField(Tag, blank=True, related_name='clients')
+    tags = models.ManyToManyField(Tag, blank=True, related_name="clients")
     timezone = models.CharField(
-        verbose_name="Client time zone", max_length=32, choices=TIME_ZONES, default="UTC"
+        verbose_name="Client time zone",
+        max_length=32,
+        choices=TIME_ZONES,
+        default="UTC",
     )
 
     @property
@@ -63,10 +66,14 @@ class Client(models.Model):
 
 
 class Message(models.Model):
-    created = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
     send_status = models.BooleanField(default=False)
-    mail_sender = models.ForeignKey(MailSender, on_delete=models.CASCADE, related_name="messages")
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="messages")
+    mail_sender = models.ForeignKey(
+        MailSender, on_delete=models.CASCADE, related_name="messages"
+    )
+    client = models.ForeignKey(
+        Client, on_delete=models.CASCADE, related_name="messages"
+    )
 
     def __str__(self):
         return f"Message {self.id} in the mail sending {self.mail_sender} for client {self.client}"

@@ -14,7 +14,7 @@ def send_messages(sender, instance: MailSender, action, **kwargs):
 
     clients = get_clients(instance)
     if not clients:
-        print('There are no clients matching the filter')
+        print("There are no clients matching the filter")
         return
 
     for client in clients:
@@ -33,10 +33,14 @@ def send_message_async(mail_sender, message, client):
     serializer_mail_sender = MailSenderSerializer(mail_sender).data
 
     task_args = (serializer_message, serializer_client, serializer_mail_sender)
-    task_kwargs = {"expires": mail_sender.sending_stop} if mail_sender.send_now() else {
-        "eta": mail_sender.sending_start, "expires": mail_sender.sending_stop}
+    task_kwargs = (
+        {"expires": mail_sender.sending_stop}
+        if mail_sender.send_now()
+        else {"eta": mail_sender.sending_start, "expires": mail_sender.sending_stop}
+    )
 
     send_message.apply_async(task_args, **task_kwargs)
+
 
 # @receiver(m2m_changed, sender=MailSender.filters.through, dispatch_uid="send_messages")
 # def send_messages(sender, instance: MailSender, action, **kwargs):

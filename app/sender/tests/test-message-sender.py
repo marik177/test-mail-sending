@@ -24,7 +24,7 @@ def mail_sender_instance():
     return MailSender.objects.create(
         sending_start=datetime.now(utc),
         sending_stop=datetime.now(utc) + timedelta(days=1),
-        text='Test text',
+        text="Test text",
     )
 
 
@@ -41,7 +41,9 @@ def client_instance(mail_sender_instance):
 # Create a custom pytest fixture for a Message instance
 @pytest.fixture
 def message_instance(mail_sender_instance, client_instance):
-    message = Message.objects.create(mail_sender=mail_sender_instance, client=client_instance)
+    message = Message.objects.create(
+        mail_sender=mail_sender_instance, client=client_instance
+    )
     return message
 
 
@@ -64,7 +66,11 @@ def mock_api_request():
 # Test the send_messages signal handler
 @pytest.mark.django_db
 def test_send_messages_signal(
-        mail_sender_instance, client_instance, message_instance, mock_celery_apply_async, mock_api_request
+    mail_sender_instance,
+    client_instance,
+    message_instance,
+    mock_celery_apply_async,
+    mock_api_request,
 ):
     # Connect the signal
     m2m_changed.connect(send_messages, sender=MailSender.filters.through)
@@ -81,7 +87,9 @@ def test_send_messages_signal(
 
 # Test the send_message Celery task
 @pytest.mark.django_db
-def test_send_message_task(mail_sender_instance, client_instance, message_instance, mock_api_request):
+def test_send_message_task(
+    mail_sender_instance, client_instance, message_instance, mock_api_request
+):
     # Configure the necessary data
     serializer_message = MessageSerializer(message_instance).data
     serializer_client = ClientSerializer(client_instance).data

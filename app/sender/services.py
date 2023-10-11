@@ -6,10 +6,14 @@ from .models import Client, MailSender
 
 
 def get_clients(mail_sender: MailSender):
-    mail_sender_filters_ids = mail_sender.filters.values_list('id', flat=True)
+    mail_sender_filters_ids = mail_sender.filters.values_list("id", flat=True)
     clients = Client.objects.all()
-    return [client for client in clients
-            if sorted(client.tags.values_list('id', flat=True)) == sorted(mail_sender_filters_ids)]
+    return [
+        client
+        for client in clients
+        if sorted(client.tags.values_list("id", flat=True))
+        == sorted(mail_sender_filters_ids)
+    ]
 
 
 def to_datetime(start, stop):

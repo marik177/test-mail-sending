@@ -5,7 +5,6 @@ from sender.models import Client
 
 
 class TestStat(APITestCase):
-
     def test_client(self):
         client_count = Client.objects.all().count()
         client_create = {
@@ -13,7 +12,9 @@ class TestStat(APITestCase):
             "tag": "crazy",
             "timezone": "UTC",
         }
-        response = self.client.post("http://127.0.0.1:8000/api/v1/clients/", data=client_create)
+        response = self.client.post(
+            "http://127.0.0.1:8000/api/v1/clients/", data=client_create
+        )
         print(response.json())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         # self.assertEqual(Client.objects.all().count(), client_count + 1)

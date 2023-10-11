@@ -35,14 +35,28 @@ class MailSenderViewSet(viewsets.ModelViewSet):
     serializer_class = MailSenderSerializer
     queryset = MailSender.objects.all()
 
-    @action(detail=True, methods=['GET', ], url_path='detail', url_name='detail')
+    @action(
+        detail=True,
+        methods=[
+            "GET",
+        ],
+        url_path="detail",
+        url_name="detail",
+    )
     def detail_report(self, request, pk=None):
         mail_sender = get_object_or_404(MailSender, id=pk)
         messages = mail_sender.messages.all()
         serializer = MessageSerializer(messages, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, methods=['GET', ], url_path='full', url_name='full')
+    @action(
+        detail=False,
+        methods=[
+            "GET",
+        ],
+        url_path="full",
+        url_name="full",
+    )
     def full_report(self, request):
         all_mail_sendings = MailSender.objects.all()
         serializer = MailSenderReportSerializer(all_mail_sendings, many=True)

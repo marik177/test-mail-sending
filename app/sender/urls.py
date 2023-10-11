@@ -5,9 +5,11 @@ from .views import ClientViewSet, MailSenderViewSet, MessageViewSet, TagViewSet
 
 router = DefaultRouter()
 
-router.register('tags', TagViewSet)
-router.register('clients', ClientViewSet)
-router.register('campaigns', MailSenderViewSet)
-router.register('messages', MessageViewSet)
+router.register("tags", TagViewSet)
+router.register("clients", ClientViewSet)
+router.register("campaigns", MailSenderViewSet)
+router.register("messages", MessageViewSet)
 
-urlpatterns = [path("", include(router.urls)), ]
+urlpatterns = [
+    path("", include(router.urls)),
+]
