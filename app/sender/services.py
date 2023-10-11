@@ -1,6 +1,8 @@
-from .models import Client, MailSender
 from datetime import datetime
+
 import pytz
+
+from .models import Client, MailSender
 
 
 def get_clients(mail_sender: MailSender):

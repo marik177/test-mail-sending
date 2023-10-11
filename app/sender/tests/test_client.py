@@ -1,7 +1,9 @@
 import json
+
 import pytest
-from sender.models import Client
 from rest_framework.test import APIClient
+
+from sender.models import Client
 
 factory = APIClient()
 
@@ -21,7 +23,7 @@ class TestClientAPI:
 
         test_data = response.json()
 
-        assert type(test_data) == list, 'Check that a GET request to `/api/v1/clients/` returns a list'
+        assert isinstance(test_data, list), 'Check that a GET request to `/api/v1/clients/` returns a list'
 
         assert len(test_data) == Client.objects.count()
 
@@ -57,7 +59,7 @@ class TestClientAPI:
         test_data = response.json()
         msg_error = 'Check that a POST request to `/api/v1/clients/` ' \
                     'returns a dictionary with the new client data'
-        assert type(test_data) == dict, msg_error
+        assert isinstance(test_data, dict), msg_error
         assert test_data.get('phone_number') == data['phone_number'], msg_error
 
         data['tags'].append(data['phone_number'][1:4])  # add mobile_operator_code to tags
@@ -90,5 +92,4 @@ class TestClientAPI:
 
         response = client.delete('/api/v1/clients/' + str(client_1.id) + '/')
         assert response.status_code == 204
-        assert clients_count-1 == Client.objects.count()
-
+        assert clients_count - 1 == Client.objects.count()

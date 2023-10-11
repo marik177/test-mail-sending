@@ -1,4 +1,5 @@
 import pytest
+
 from sender.models import MailSender
 
 
@@ -15,7 +16,7 @@ class TestMailAPI:
 
         test_data = response.json()
 
-        assert type(test_data) == list, 'Check that a GET request to `/api/v1/campaings/` returns a list'
+        assert isinstance(test_data, list), 'Check that a GET request to `/api/v1/campaings/` returns a list'
 
         assert len(test_data) == MailSender.objects.count()
 
@@ -58,7 +59,7 @@ class TestMailAPI:
 
         test_data = response.json()
 
-        assert type(test_data) == dict
+        assert isinstance(test_data, dict)
         assert test_data.get('sending_start') == data['sending_start']
         assert test_data.get('sending_stop') == data['sending_stop']
         assert test_data.get('text') == data['text']

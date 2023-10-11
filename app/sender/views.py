@@ -1,11 +1,18 @@
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
-from .serializers import TagSerializer, ClientSerializer, \
-    MailSenderSerializer, MessageSerializer, MailSenderReportSerializer, ClientWriteSerializer
-from .models import Tag, Client, MailSender, Message
+from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import SAFE_METHODS
+from rest_framework.response import Response
+
+from .models import Client, MailSender, Message, Tag
+from .serializers import (
+    ClientSerializer,
+    ClientWriteSerializer,
+    MailSenderReportSerializer,
+    MailSenderSerializer,
+    MessageSerializer,
+    TagSerializer,
+)
 
 
 class TagViewSet(viewsets.ModelViewSet):

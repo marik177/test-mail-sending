@@ -1,9 +1,10 @@
-from rest_framework.test import APITestCase
-from sender.models import Client
 from rest_framework import status
+from rest_framework.test import APITestCase
+
+from sender.models import Client
+
 
 class TestStat(APITestCase):
-
 
     def test_client(self):
         client_count = Client.objects.all().count()

@@ -1,8 +1,7 @@
-import pytest
-from datetime import datetime
-from datetime import timedelta
-import pytz
+from datetime import datetime, timedelta
 
+import pytest
+import pytz
 
 utc = pytz.UTC
 

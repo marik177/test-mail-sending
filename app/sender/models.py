@@ -1,8 +1,7 @@
 import pytz
-from django.db import models
 from django.core.validators import RegexValidator
+from django.db import models
 from django.utils import timezone
-
 
 TIME_ZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
 

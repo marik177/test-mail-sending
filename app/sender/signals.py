@@ -1,9 +1,10 @@
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
+
 from .models import MailSender, Message
+from .serializers import ClientSerializer, MailSenderSerializer, MessageSerializer
 from .services import get_clients
 from .tasks import send_message
-from .serializers import MessageSerializer, ClientSerializer, MailSenderSerializer
 
 
 @receiver(m2m_changed, sender=MailSender.filters.through, dispatch_uid="send_messages")

@@ -1,4 +1,5 @@
 import pytest
+
 from sender.models import Tag
 
 
@@ -17,7 +18,7 @@ class TestTagAPI:
 
         test_data = response.json()
 
-        assert type(test_data) == list, 'Check that a GET request to `/api/v1/tags/` returns a list'
+        assert isinstance(test_data, list), 'Check that a GET request to `/api/v1/tags/` returns a list'
 
         assert len(test_data) == Tag.objects.count()
 
@@ -45,7 +46,7 @@ class TestTagAPI:
         test_data = response.json()
 
         msg_error = 'Check that a POST request to `/api/v1/tags/` returns a dictionary with the new tag data'
-        assert type(test_data) == dict, msg_error
+        assert isinstance(test_data, dict), msg_error
         assert test_data.get('name') == data['name'], msg_error
 
         assert tag_count + 1 == Tag.objects.count(), \

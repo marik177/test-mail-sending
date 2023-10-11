@@ -1,17 +1,19 @@
 from datetime import datetime, timedelta
+from unittest.mock import Mock, patch
 
 import pytest
-from unittest.mock import Mock, patch
-from django.test import TestCase
-from django.db.models.signals import m2m_changed
-from sender.models import MailSender, Client, Message
-from sender.signals import send_messages  # Import your actual signal handler
-from sender.tasks import send_message  # Import your actual Celery task
-from sender.services import get_clients, to_datetime  # Import your utility functions
-from sender.serializers import MessageSerializer, ClientSerializer, MailSenderSerializer
-from django.conf import settings
 import pytz
 import requests
+from django.conf import settings
+from django.db.models.signals import m2m_changed
+from django.test import TestCase
+
+from sender.models import Client, MailSender, Message
+from sender.serializers import ClientSerializer, MailSenderSerializer, MessageSerializer
+from sender.services import get_clients  # Import your utility functions
+from sender.services import to_datetime
+from sender.signals import send_messages  # Import your actual signal handler
+from sender.tasks import send_message  # Import your actual Celery task
 
 utc = pytz.UTC
 

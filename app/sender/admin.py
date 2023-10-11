@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Message, MailSender, Tag, Client
+
+from .models import Client, MailSender, Message, Tag
 
 
 class ClientAdmin(admin.ModelAdmin):

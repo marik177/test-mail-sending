@@ -1,12 +1,14 @@
+from datetime import datetime, timedelta
+
 import pytz
 import requests
-from requests.exceptions import RequestException
-from datetime import datetime, timedelta
 from celery import shared_task
-from django.conf import settings
 from celery.utils.log import get_task_logger
-from .services import to_datetime
+from django.conf import settings
+from requests.exceptions import RequestException
+
 from .models import Message
+from .services import to_datetime
 
 logger = get_task_logger(__name__)
 
