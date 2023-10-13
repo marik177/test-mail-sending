@@ -13,7 +13,7 @@ RUN pip install --upgrade pip
 # lint
 RUN pip install flake8
 COPY . .
-#RUN flake8 --exclude venv,migration --ignore=E501,F401,F841,E128
+RUN flake8 --exclude venv,migration --ignore=E501,F401,F403
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt

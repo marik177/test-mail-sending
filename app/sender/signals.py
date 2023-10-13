@@ -24,7 +24,7 @@ def send_messages(sender, instance: MailSender, action, **kwargs):
 
 def create_message(mail_sender, client):
     message = Message.objects.create(mail_sender=mail_sender, client=client)
-    return MessageSerializer(message).data
+    return message
 
 
 def send_message_async(mail_sender, message, client):

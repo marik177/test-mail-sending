@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import pytz
 import requests
@@ -6,6 +6,7 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.conf import settings
 from requests.exceptions import RequestException
+from rest_framework.response import Response
 
 from .models import Message
 from .services import to_datetime
@@ -43,7 +44,4 @@ def send_message(self, message, client, mail_sender):
                 Message.objects.filter(id=data["id"]).update(send_status=True)
                 return r.json()
     else:
-        # task_id = self.request.id
-        # task = self.AsyncResult(task_id)
-        # app.control.revoke(task_id)
-        return "Mail sending time comes to the end"
+        return Response("Mail sending time comes to the end")

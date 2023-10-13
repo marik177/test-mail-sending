@@ -1,5 +1,3 @@
-import json
-
 import pytest
 from rest_framework.test import APIClient
 
@@ -51,7 +49,7 @@ class TestClientAPI:
         ), "Check that a POST request to `/api/v1/clients/` with incorrect data returns status 400"
 
         data = {
-            "phone_number": "72222222223",
+            "phone_number": "72322222223",
             "tags": [tag_1.name],
         }
         response = client.post(

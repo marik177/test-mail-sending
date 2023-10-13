@@ -1,0 +1,61 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-7.4.2, pluggy-1.3.0 -- /home/marik/PycharmProjects/messaging-service/app/venv/bin/python
+django: settings: messages_sender.settings (from ini)
+rootdir: /home/marik/PycharmProjects/messaging-service/app
+configfile: pytest.ini
+plugins: cov-4.1.0, django-4.5.2
+collecting ... collected 20 items
+
+sender/tests/test_client.py::TestClientAPI::test_client_create PASSED    [  5%]
+sender/tests/test_client.py::TestClientAPI::test_client_does_not_create_with_not_7_code PASSED [ 10%]
+sender/tests/test_client.py::TestClientAPI::test_client_does_not_create_with_not_right_format_phone_number PASSED [ 15%]
+sender/tests/test_client.py::TestClientAPI::test_client_delete PASSED    [ 20%]
+sender/tests/test_mail_sender.py::TestMailAPI::test_mail_not_found PASSED [ 25%]
+sender/tests/test_mail_sender.py::TestMailAPI::test_mail_sender_get PASSED [ 30%]
+sender/tests/test_mail_sender.py::TestMailAPI::test_mail_sender_create PASSED [ 35%]
+sender/tests/test_mail_sender.py::TestMailAPI::test_detail_report PASSED [ 40%]
+sender/tests/test_mail_sender.py::TestMailAPI::test_full_report PASSED   [ 45%]
+sender/tests/test_message_sender.py::TestMessageSendingAPI::test_send_messages_signal PASSED [ 50%]
+sender/tests/test_message_sender.py::TestMessageSendingAPI::test_send_message_task_ok PASSED [ 55%]
+sender/tests/test_message_sender.py::TestMessageSendingAPI::test_send_message_task_failed PASSED [ 60%]
+sender/tests/test_message_sender.py::TestMessageSendingAPI::test_send_message_time_come_to_the_end PASSED [ 65%]
+sender/tests/test_services.py::test_return_clients PASSED                [ 70%]
+sender/tests/test_tag.py::TestTagAPI::test_tag_create PASSED             [ 75%]
+sender/tests/test_client.py::TestClientAPI::test_client_not_found PASSED [ 80%]
+sender/tests/test_client.py::TestClientAPI::test_clients_get PASSED      [ 85%]
+sender/tests/test_tag.py::TestTagAPI::test_tags_not_found PASSED         [ 90%]
+sender/tests/test_tag.py::TestTagAPI::test_tag_get PASSED                [ 95%]
+sender/tests/test_services.py::test_to_datetime PASSED                   [100%]
+
+---------- coverage: platform linux, python 3.10.12-final-0 ----------
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+messages_sender/__init__.py                 2      0   100%
+messages_sender/celery.py                   6      0   100%
+messages_sender/settings.py                25      0   100%
+messages_sender/urls.py                     5      0   100%
+messages_sender/yasg.py                     6      0   100%
+sender/__init__.py                          0      0   100%
+sender/admin.py                            14      0   100%
+sender/apps.py                              6      0   100%
+sender/models.py                           45      2    96%   61, 79
+sender/serializers.py                      47      0   100%
+sender/services.py                         17      1    94%   28
+sender/signals.py                          27      0   100%
+sender/tasks.py                            28      0   100%
+sender/tests/__init__.py                    0      0   100%
+sender/tests/conftest.py                    1      0   100%
+sender/tests/fixtures/__init__.py           0      0   100%
+sender/tests/fixtures/fixture_data.py      56      0   100%
+sender/tests/test_client.py                55      0   100%
+sender/tests/test_mail_sender.py           49      0   100%
+sender/tests/test_message_sender.py        39      0   100%
+sender/tests/test_services.py              15      0   100%
+sender/tests/test_tag.py                   32      0   100%
+sender/urls.py                              9      0   100%
+sender/views.py                            33      0   100%
+---------------------------------------------------------------------
+TOTAL                                     517      3    99%
+
+
+============================== 20 passed in 0.47s ==============================

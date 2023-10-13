@@ -1,4 +1,4 @@
-import pytest
+from rest_framework.response import Response
 
 from sender.models import MailSender
 
@@ -80,3 +80,13 @@ class TestMailAPI:
         assert test_data.get("sending_start") == data["sending_start"]
 
         assert mail_senders_count + 1 == MailSender.objects.count()
+
+    def test_detail_report(self, client, db, mail_sender_1, message_1, monkeypatch):
+        response = client.get(f"/api/v1/campaigns/{str(mail_sender_1.id)}/detail/")
+        assert response.status_code == 200
+        assert isinstance(response, Response)
+
+    def test_full_report(self, client, db, mail_sender_1, message_1, monkeypatch):
+        response = client.get("/api/v1/campaigns/full/")
+        assert response.status_code == 200
+        assert isinstance(response, Response)

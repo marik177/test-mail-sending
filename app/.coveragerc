@@ -1,0 +1,8 @@
+[run]
+omit =
+    tests/*
+    manage.py
+    sender/tests.py
+    sender/migrations/*
+[report]
+show_missing=true
