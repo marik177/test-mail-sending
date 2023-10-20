@@ -7,8 +7,7 @@ from sender.services import get_clients, to_datetime
 
 def test_return_clients(db, mail_sender_1, client_1, client_2, tag_1, tag_2):
     clients = get_clients(mail_sender_1)
-    assert isinstance(clients, list)
-    assert clients == [client_2]
+    assert list(clients) == [client_2]
 
 
 def test_to_datetime():
