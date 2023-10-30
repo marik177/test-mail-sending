@@ -5,14 +5,9 @@ from rest_framework.permissions import SAFE_METHODS
 from rest_framework.response import Response
 
 from .models import Client, MailSender, Message, Tag
-from .serializers import (
-    ClientSerializer,
-    ClientWriteSerializer,
-    MailSenderReportSerializer,
-    MailSenderSerializer,
-    MessageSerializer,
-    TagSerializer,
-)
+from .serializers import (ClientSerializer, ClientWriteSerializer,
+                          MailSenderReportSerializer, MailSenderSerializer,
+                          MessageSerializer, TagSerializer)
 
 
 class TagViewSet(viewsets.ModelViewSet):

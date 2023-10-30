@@ -3,7 +3,7 @@ asgiref==3.7.2
 async-timeout==4.0.3
 bandit==1.7.5
 billiard==4.1.0
-black==23.9.1
+black
 celery==5.3.4
 certifi==2023.7.22
 charset-normalizer==3.3.0
@@ -56,7 +56,7 @@ requests==2.31.0
 rich==13.6.0
 ruamel.yaml==0.17.35
 ruamel.yaml.clib==0.2.8
-safety==2.3.5
+safety
 six==1.16.0
 smmap==5.0.1
 sqlparse==0.4.4
