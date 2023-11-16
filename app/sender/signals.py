@@ -10,4 +10,3 @@ def send_messages(sender, instance: MailSender, action, **kwargs):
     if action != "post_add":
         return
     send_to_all_clients(instance)
-

@@ -1,6 +1,5 @@
 import pytest
 from rest_framework.test import APIClient
-
 from sender.models import Client
 
 factory = APIClient()

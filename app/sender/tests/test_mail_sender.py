@@ -1,5 +1,4 @@
 from rest_framework.response import Response
-
 from sender.models import MailSender
 
 

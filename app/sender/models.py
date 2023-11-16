@@ -37,7 +37,7 @@ class Client(models.Model):
     validate_phone = RegexValidator(
         regex=r"^7\d{10}$",
         message="The phone number must be in format "
-                "7XXXXXXXXXX (X - number from 0 to 9) and has the length of 11",
+        "7XXXXXXXXXX (X - number from 0 to 9) and has the length of 11",
     )
     phone_number = models.CharField(
         verbose_name="Phone number",
@@ -81,4 +81,3 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Message"
         verbose_name_plural = "Messages"
-

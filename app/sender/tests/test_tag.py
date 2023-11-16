@@ -1,5 +1,4 @@
 import pytest
-
 from sender.models import Tag
 
 

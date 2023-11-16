@@ -1,5 +1,4 @@
 from celery import shared_task
-
 from sender.external_service import send_message_task
 
 

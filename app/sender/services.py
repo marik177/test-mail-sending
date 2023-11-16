@@ -1,7 +1,6 @@
 from .models import Client, MailSender, Message
 from .selectors import get_clients
-from .serializers import (ClientSerializer, MailSenderSerializer,
-                          MessageSerializer)
+from .serializers import ClientSerializer, MailSenderSerializer, MessageSerializer
 from .tasks import send_message
 
 
@@ -41,4 +40,3 @@ def _prepare_data(mail_sender, message, client):
     serializer_client = ClientSerializer(client).data
     serializer_mail_sender = MailSenderSerializer(mail_sender).data
     return serializer_message, serializer_client, serializer_mail_sender
-

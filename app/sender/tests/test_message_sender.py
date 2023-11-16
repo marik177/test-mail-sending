@@ -4,14 +4,11 @@ from unittest.mock import patch
 import pytest
 import pytz
 from requests.exceptions import RequestException
-
-from sender.external_service import request_to_external_service
+from sender.external_service import request_to_external_service, send_message_task
 from sender.models import MailSender
-from sender.serializers import (ClientSerializer, MailSenderSerializer,
-                                MessageSerializer)
+from sender.serializers import ClientSerializer, MailSenderSerializer, MessageSerializer
 from sender.signals import send_messages  # Import your actual signal handler
 from sender.tasks import send_message  # Import your actual Celery task
-from sender.external_service import send_message_task
 
 utc = pytz.UTC
 
